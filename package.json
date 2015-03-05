@@ -1,0 +1,68 @@
+{
+  "name": "utils-copy",
+  "version": "0.0.0",
+  "description": "Copy and deep clone a value with the ability to specify a copy depth.",
+  "author": {
+    "name": "Athan Reines",
+    "email": "kgryte@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Athan Reines",
+      "email": "kgryte@gmail.com"
+    }
+  ],
+  "scripts": {
+    "test": "./node_modules/.bin/mocha",
+    "test-cov": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --dir ./reports/coverage -- -R spec",
+    "coveralls": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --dir ./reports/coveralls/coverage --report lcovonly -- -R spec && cat ./reports/coveralls/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./reports/coveralls"
+  },
+  "main": "./lib",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kgryte/utils-copy.git"
+  },
+  "keywords": [
+    "utilities",
+    "utils",
+    "util",
+    "copy",
+    "clone",
+    "deep",
+    "deepcopy",
+    "deepclone",
+    "shallow",
+    "shallowcopy",
+    "array",
+    "object",
+    "date",
+    "regexp"
+  ],
+  "bugs": {
+    "url": "https://github.com/kgryte/utils-copy/issues"
+  },
+  "dependencies": {
+    "type-name": "^1.0.1",
+    "validate.io-array": "^1.0.3",
+    "validate.io-boolean": "^1.0.4",
+    "validate.io-nonnegative-integer": "^1.0.0",
+    "validate.io-number": "^1.0.3",
+    "validate.io-regexp": "^1.0.2",
+    "validate.io-strict-date": "^1.0.2",
+    "validate.io-string": "^1.0.2"
+  },
+  "devDependencies": {
+    "chai": "2.x.x",
+    "mocha": "2.x.x",
+    "coveralls": "^2.11.1",
+    "istanbul": "^0.3.0",
+    "jshint": "2.x.x",
+    "jshint-stylish": "^1.0.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ]
+}
