@@ -44,12 +44,7 @@
   "dependencies": {
     "type-name": "^1.0.1",
     "validate.io-array": "^1.0.3",
-    "validate.io-boolean": "^1.0.4",
-    "validate.io-nonnegative-integer": "^1.0.0",
-    "validate.io-number": "^1.0.3",
-    "validate.io-regexp": "^1.0.2",
-    "validate.io-strict-date": "^1.0.2",
-    "validate.io-string": "^1.0.2"
+    "validate.io-nonnegative-integer": "^1.0.0"
   },
   "devDependencies": {
     "chai": "2.x.x",
