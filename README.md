@@ -95,6 +95,7 @@ console.log( value[0].c === copy[0].c );
 	-	`Float32Array`
 	-	`Float64Array`
 	-	`Buffer` ([Node.js]((http://nodejs.org/api/buffer.html)))
+
 *	List of __unsupported__ values/types:
 	-	`DOMElement`: to copy DOM elements, use `.cloneNode()`.
 	-	`Set`
@@ -104,11 +105,13 @@ console.log( value[0].c === copy[0].c );
 	-	`ReferenceError`
 	-	`SyntaxError`
 	-	`RangeError`
+
 *	If you need support for any of the above types, feel free to file an issue or submit a pull request.
 *	The implementation can handle circular references.
 *	If a `Number`, `String`, or `Boolean` object is encountered, the value is cloned as a primitive. This behavior is intentional. __Avoid__ creating numbers, strings, and booleans via the `new` operator and a constructor.
 *	`functions` are __not__ cloned; their reference is only copied.
 *	Support for copying class instances is inherently __fragile__. Any instances with privileged access to variables (e.g., within closures) cannot be cloned. This stated, basic copying of class instances is supported. Provided an environment which supports ES5, the implementation is greedy and performs a deep clone of any arbitrary class instance and its properties. The implementation assumes that the concept of `level` applies only to the class instance reference, but not to its internal state.
+	
 	``` javascript
 	function Foo() {
 		this._data = [ 1, 2, 3, 4 ];
