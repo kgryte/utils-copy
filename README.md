@@ -2,7 +2,7 @@ Copy
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Copy and deep clone a value with the ability to specify copy depth.
+> Copy or deep clone a value to an arbitrary depth.
 
 
 ## Installation
@@ -22,7 +22,7 @@ var createCopy = require( 'utils-copy' );
 
 #### createCopy( value[, level] )
 
-Copies and deep clones a `value`. The `function` accepts both `objects` and `primitives`.
+Copy or deep clone a `value` to an arbitrary depth. The `function` accepts both `objects` and `primitives`.
 
 ``` javascript
 var value, copy;
@@ -41,18 +41,21 @@ console.log( value[0].c === copy[0].c );
 // returns false
 ```
 
-The default behavior returns a full deep copy of any `objects`. To limit the copy depth, set the `level` option.
+The default behavior returns a __full__ deep copy of any `objects`. To limit the copy depth, set the `level` option.
 
 ``` javascript
 var value, copy;
 
 value = [{'a':1,'b':true,'c':[1,2,3]}];
+
+// Trivial case => return the same reference
 copy = createCopy( value, 0 );
 // returns [{'a':1,'b':true,'c':[1,2,3]}]
 
 console.log( value[0] === copy[0] );
 // returns true
 
+// Shallow copy:
 copy = createCopy( value, 1 );
 
 console.log( value[0] === copy[0] );
@@ -60,6 +63,12 @@ console.log( value[0] === copy[0] );
 
 console.log( value[0].c === copy[0].c );
 // returns true
+
+// Deep copy:
+copy = createCopy( value, 2 );
+
+console.log( value[0].c === copy[0].c );
+// returns false
 ```
 
 
@@ -96,9 +105,29 @@ console.log( value[0].c === copy[0].c );
 	-	`SyntaxError`
 	-	`RangeError`
 *	If you need support for any of the above types, feel free to file an issue or submit a pull request.
-*	The function can handle circular references.
-*	If the function encounters a `Number`, `String`, or `Boolean` object, the value is cloned as a primitive. This behavior is intentional. __Avoid__ creating numbers, strings, and booleans via the `new` operator and a constructor.
+*	The implementation can handle circular references.
+*	If a `Number`, `String`, or `Boolean` object is encountered, the value is cloned as a primitive. This behavior is intentional. __Avoid__ creating numbers, strings, and booleans via the `new` operator and a constructor.
 *	`functions` are __not__ cloned; their reference is only copied.
+*	Support for copying class instances is inherently __fragile__. Any instances with privileged access to variables (e.g., within closures) cannot be cloned. This stated, basic copying of class instances is supported. Provided an environment which supports ES5, the implementation is greedy and performs a deep clone of any arbitrary class instance and its properties. The implementation assumes that the concept of `level` applies only to the class instance reference, but not to its internal state.
+	``` javascript
+	function Foo() {
+		this._data = [ 1, 2, 3, 4 ];
+		this._name = 'bar';
+		return this;
+	}
+
+	var foo = new Foo();
+	var fooey = createCopy( foo );
+
+	console.log( foo._name === fooey._name );
+	// returns true
+
+	console.log( foo._data === fooey._data );
+	// returns false
+
+	console.log( foo._data[0] === fooey._data[0] );
+	// returns true
+	```
 
 
 ## Examples
@@ -106,6 +135,37 @@ console.log( value[0].c === copy[0].c );
 ``` javascript
 var createCopy = require( 'utils-copy' );
 
+var arr = [
+	{
+		'x': new Date(),
+		'y': [Math.random(),Math.random()],
+		'z': new Int32Array([1,2,3,4]),
+		'label': 'Beep'
+	},
+	{
+		'x': new Date(),
+		'y': [Math.random(),Math.random()],
+		'z': new Int32Array([3,1,2,4]),
+		'label': 'Boop'
+	}
+];
+
+var copy = createCopy( arr );
+
+console.log( arr[ 0 ] === copy[ 0 ] );
+// returns false
+
+console.log( arr[ 1 ].y === copy[ 1 ].y );
+// returns false
+
+
+copy = createCopy( arr, 1 );
+
+console.log( arr[ 0 ] === copy[ 0 ] );
+// returns true
+
+console.log( arr[ 1 ].z === copy[ 1 ].z );
+// returns true
 ```
 
 To run the example code from the top-level application directory,

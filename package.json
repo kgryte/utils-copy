@@ -1,7 +1,7 @@
 {
   "name": "utils-copy",
   "version": "0.0.0",
-  "description": "Copy and deep clone a value with the ability to specify a copy depth.",
+  "description": "Copy or deep clone a value to an arbitrary depth.",
   "author": {
     "name": "Athan Reines",
     "email": "kgryte@gmail.com"
