@@ -90,9 +90,16 @@ console.log( value[0].c === copy[0].c );
 *	The function can handle circular references.
 *	If the function encounters a `Number`, `String`, or `Boolean` object, the value is cloned as a primitive. This behavior is intentional. __Avoid__ creating numbers, strings, and booleans via the `new` operator and a constructor.
 *	`functions` are __not__ cloned; their reference is only copied.
-*	To copy DOM elements, use `.cloneNode()`. If you want a means to copy arrays or objects of DOM elements, feel free to file an issue or submit a pull request.
-*	`Set` and `Map` objects are not currently supported. If you need support for these, feel free to file an issue or submit a pull request.
-*	`Error` objects are not currently supported. If you need support for these, feel free to file an issue or submit a pull request.
+*	List of unsupported values/types:
+	-	`DOMElement`: to copy DOM elements, use `.cloneNode()`. If you want a means to copy arrays or objects of DOM elements, feel free to file an issue or submit a pull request.
+	-	`Set`
+	-	`Map`
+	-	`Error`
+	- 	`URIError`
+	-	`ReferenceError`
+	-	`SyntaxError`
+	-	`RangeError`
+*	If you need support for any of the above types, feel free to file an issue or submit a pull request.
 
 
 ## Examples
