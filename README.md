@@ -135,7 +135,7 @@ console.log( value[0].c === copy[0].c );
 *	Re: __why__ this implementation and not the many other [copy](https://github.com/victusfate/copyjs/blob/master/lib/copy.js)/[deep copy](https://github.com/sasaplus1/deepcopy.js)/[clone](https://github.com/dankogai/js-object-clone)/[deep clone](https://github.com/evlun/copy/blob/master/copy.js) modules out there.
 	1. 	They are buggy. For example, circular references are not properly tracked.
 	2. 	They fail to account for `Number`, `String`, and `Boolean` objects.
-	3. 	They fail to properly validate if a value is a Node `Buffer` object, assuming, for instance, a Node environment.
+	3. 	They fail to properly validate if a value is a Node `Buffer` object. They assume, for instance, a Node environment.
 	4. 	They fail to clone class instances.
 	5. 	They do not allow limiting the copy depth.
 	6. 	They are not sufficiently tested.
