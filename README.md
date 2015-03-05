@@ -111,7 +111,7 @@ console.log( value[0].c === copy[0].c );
 *	If a `Number`, `String`, or `Boolean` object is encountered, the value is cloned as a primitive. This behavior is intentional. __Avoid__ creating numbers, strings, and booleans via the `new` operator and a constructor.
 *	`functions` are __not__ cloned; their reference is only copied.
 *	Support for copying class instances is inherently __fragile__. Any instances with privileged access to variables (e.g., within closures) cannot be cloned. This stated, basic copying of class instances is supported. Provided an environment which supports ES5, the implementation is greedy and performs a deep clone of any arbitrary class instance and its properties. The implementation assumes that the concept of `level` applies only to the class instance reference, but not to its internal state.
-	
+
 	``` javascript
 	function Foo() {
 		this._data = [ 1, 2, 3, 4 ];
@@ -131,6 +131,14 @@ console.log( value[0].c === copy[0].c );
 	console.log( foo._data[0] === fooey._data[0] );
 	// returns true
 	```
+
+*	Re: __why__ this implementation and not the many other [copy](https://github.com/victusfate/copyjs/blob/master/lib/copy.js)/[deep copy](https://github.com/sasaplus1/deepcopy.js)/[clone](https://github.com/dankogai/js-object-clone)/[deep clone](https://github.com/evlun/copy/blob/master/copy.js) modules out there.
+	1. 	They are buggy. For example, circular references are not properly tracked.
+	2. 	They fail to account for `Number`, `String`, and `Boolean` objects.
+	3. 	They fail to properly validate if a value is a Node `Buffer` object, assuming, for instance, a Node environment.
+	4. 	They fail to clone class instances.
+	5. 	They do not allow limiting the clone depth.
+	6. 	They are not sufficiently tested.
 
 
 ## Examples
