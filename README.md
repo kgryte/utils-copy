@@ -65,7 +65,7 @@ console.log( value[0].c === copy[0].c );
 
 ## Notes
 
-*	List of supported values/types:
+*	List of __supported__ values/types:
 	-	`undefined`
 	-	`null`
 	-	`boolean`/`Boolean`
@@ -86,12 +86,8 @@ console.log( value[0].c === copy[0].c );
 	-	`Float32Array`
 	-	`Float64Array`
 	-	`Buffer` ([Node.js]((http://nodejs.org/api/buffer.html)))
-
-*	The function can handle circular references.
-*	If the function encounters a `Number`, `String`, or `Boolean` object, the value is cloned as a primitive. This behavior is intentional. __Avoid__ creating numbers, strings, and booleans via the `new` operator and a constructor.
-*	`functions` are __not__ cloned; their reference is only copied.
-*	List of unsupported values/types:
-	-	`DOMElement`: to copy DOM elements, use `.cloneNode()`. If you want a means to copy arrays or objects of DOM elements, feel free to file an issue or submit a pull request.
+*	List of __unsupported__ values/types:
+	-	`DOMElement`: to copy DOM elements, use `.cloneNode()`.
 	-	`Set`
 	-	`Map`
 	-	`Error`
@@ -100,6 +96,9 @@ console.log( value[0].c === copy[0].c );
 	-	`SyntaxError`
 	-	`RangeError`
 *	If you need support for any of the above types, feel free to file an issue or submit a pull request.
+*	The function can handle circular references.
+*	If the function encounters a `Number`, `String`, or `Boolean` object, the value is cloned as a primitive. This behavior is intentional. __Avoid__ creating numbers, strings, and booleans via the `new` operator and a constructor.
+*	`functions` are __not__ cloned; their reference is only copied.
 
 
 ## Examples
