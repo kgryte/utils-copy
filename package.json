@@ -1,6 +1,6 @@
 {
   "name": "utils-copy",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Copy or deep clone a value to an arbitrary depth.",
   "author": {
     "name": "Athan Reines",
