@@ -137,7 +137,7 @@ console.log( value[0].c === copy[0].c );
 	2. 	They fail to account for `Number`, `String`, and `Boolean` objects.
 	3. 	They fail to properly validate if a value is a Node `Buffer` object, assuming, for instance, a Node environment.
 	4. 	They fail to clone class instances.
-	5. 	They do not allow limiting the clone depth.
+	5. 	They do not allow limiting the copy depth.
 	6. 	They are not sufficiently tested.
 
 
