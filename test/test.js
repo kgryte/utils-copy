@@ -3,14 +3,14 @@
 
 // MODULES //
 
-var chai = require( 'chai' ),
-	createCopy = require( './../lib' );
+var chai = require( 'chai' );
+var createCopy = require( './../lib' );
 
 
 // VARIABLES //
 
-var expect = chai.expect,
-	assert = chai.assert;
+var expect = chai.expect;
+var assert = chai.assert;
 
 
 // TESTS //
@@ -39,27 +39,27 @@ describe( 'utils-copy', function tests() {
 		return this;
 	}
 
-	var set = new Set(),
-		map = new Map(),
-		foo = new Foo(),
-		bar = new Bar(),
-		date = new Date(),
-		re = /.*/,
-		bool = new Boolean( true ),
-		str = new String( 'beep' ),
-		num = new Number( Math.PI ),
-		fcn = function(){},
-		buffer = new Buffer([10,20,30,40]),
-		cbuffer = new Buffer( buffer ),
-		int8arr = new Int8Array([1,2,3,4]),
-		uint8arr = new Uint8Array([5,6,7,8]),
-		uint8carr = new Uint8ClampedArray([9,10,11,12]),
-		int16arr = new Int16Array([256,257,258]),
-		uint16arr = new Uint16Array([259,260,261]),
-		int32arr = new Int32Array([65537,65538]),
-		uint32arr = new Uint32Array([65539,65540]),
-		float32arr = new Float32Array([Math.PI]),
-		float64arr = new Float64Array([Number.MAX_VALUE]);
+	var set = new Set();
+	var map = new Map();
+	var foo = new Foo();
+	var bar = new Bar();
+	var date = new Date();
+	var re = /.*/;
+	var bool = new Boolean( true );
+	var str = new String( 'beep' );
+	var num = new Number( Math.PI );
+	var fcn = function(){};
+	var buffer = new Buffer([10,20,30,40]);
+	var cbuffer = new Buffer( buffer );
+	var int8arr = new Int8Array([1,2,3,4]);
+	var uint8arr = new Uint8Array([5,6,7,8]);
+	var uint8carr = new Uint8ClampedArray([9,10,11,12]);
+	var int16arr = new Int16Array([256,257,258]);
+	var uint16arr = new Uint16Array([259,260,261]);
+	var int32arr = new Int32Array([65537,65538]);
+	var uint32arr = new Uint32Array([65539,65540]);
+	var float32arr = new Float32Array([Math.PI]);
+	var float64arr = new Float64Array([Number.MAX_VALUE]);
 
 	Object.preventExtensions( bar );
 	Object.seal( bar );
@@ -228,7 +228,10 @@ describe( 'utils-copy', function tests() {
 	});
 
 	it( 'should throw an error if provided a nonnegative integer level', function test() {
-		var values = [
+		var values;
+		var i;
+
+		values = [
 			'5',
 			Math.PI,
 			-1,
@@ -241,7 +244,7 @@ describe( 'utils-copy', function tests() {
 			function(){}
 		];
 
-		for ( var i = 0; i < values.length; i++ ) {
+		for ( i = 0; i < values.length; i++ ) {
 			expect( badValue( values[i] ) ).to.throw( TypeError );
 		}
 		function badValue( value ) {
@@ -268,7 +271,9 @@ describe( 'utils-copy', function tests() {
 	});
 
 	it( 'should accept primitives', function test() {
-		var values, actual;
+		var values;
+		var actual;
+		var i;
 
 		values = [
 			'beep',
@@ -278,7 +283,7 @@ describe( 'utils-copy', function tests() {
 			true
 		];
 
-		for ( var i = 0; i < values.length; i++ ) {
+		for ( i = 0; i < values.length; i++ ) {
 			actual = createCopy( values[ i ] );
 			assert.strictEqual( actual, values[ i ] );
 		}
@@ -336,7 +341,8 @@ describe( 'utils-copy', function tests() {
 	});
 
 	it( 'should return an empty object for class instances when in environments not supporting at least ES5', function test() {
-		var freeze, actual;
+		var freeze;
+		var actual;
 
 		freeze = Object.freeze;
 		Object.freeze = undefined;
@@ -353,7 +359,8 @@ describe( 'utils-copy', function tests() {
 	});
 
 	it( 'should handle circular references', function test() {
-		var actual, obj;
+		var actual;
+		var obj;
 
 		obj = {};
 		obj.to = obj;
@@ -400,6 +407,26 @@ describe( 'utils-copy', function tests() {
 	it( 'should return the same reference when the level is set to 0', function test() {
 		var actual = createCopy( obj, 0 );
 		assert.strictEqual( actual, expectedObj0 );
+	});
+
+	it( 'should preserve property descriptors', function test() {
+		var actual;
+		var desc;
+		var obj;
+
+		obj = {};
+		desc = {
+			'value': 'b',
+			'writable': false,
+			'enumerable': true,
+			'configurable': false
+		};
+
+		Object.defineProperty( obj, 'a', desc );
+
+		actual = createCopy( obj );
+		assert.deepEqual( actual, obj );
+		assert.deepEqual( Object.getOwnPropertyDescriptor( actual, 'a' ), desc );
 	});
 
 });
