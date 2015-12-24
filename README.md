@@ -1,6 +1,6 @@
 Copy
 ===
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependencies][dependencies-image]][dependencies-url]
 
 > Copy or deep clone a value to an arbitrary depth.
 
@@ -232,8 +232,8 @@ Copyright &copy; 2015. Athan Reines.
 [travis-image]: http://img.shields.io/travis/kgryte/utils-copy/master.svg
 [travis-url]: https://travis-ci.org/kgryte/utils-copy
 
-[coveralls-image]: https://img.shields.io/coveralls/kgryte/utils-copy/master.svg
-[coveralls-url]: https://coveralls.io/r/kgryte/utils-copy?branch=master
+[codecov-image]: https://img.shields.io/codecov/c/github/kgryte/utils-copy/master.svg
+[codecov-url]: https://codecov.io/github/kgryte/utils-copy?branch=master
 
 [dependencies-image]: http://img.shields.io/david/kgryte/utils-copy.svg
 [dependencies-url]: https://david-dm.org/kgryte/utils-copy
@@ -243,3 +243,7 @@ Copyright &copy; 2015. Athan Reines.
 
 [github-issues-image]: http://img.shields.io/github/issues/kgryte/utils-copy.svg
 [github-issues-url]: https://github.com/kgryte/utils-copy/issues
+
+[mocha]: http://mochajs.org/
+[chai]: http://chaijs.com
+[istanbul]: https://github.com/gotwarlost/istanbul
