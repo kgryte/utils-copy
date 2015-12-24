@@ -132,7 +132,7 @@ console.log( value[0].c === copy[0].c );
 	// returns true
 	```
 
-*	Re: __why__ this implementation and not the many other [copy](https://github.com/victusfate/copyjs/blob/master/lib/copy.js)/[deep copy](https://github.com/sasaplus1/deepcopy.js)/[clone](https://github.com/dankogai/js-object-clone)/[deep clone](https://github.com/evlun/copy/blob/master/copy.js) modules out there.
+*	Re: __why__ this implementation and not the many other [copy][victusfate-copyjs]/[deep copy][sasaplus1-deepcopy]/[clone][dankogai-clone]/[deep clone][evlun-copy] modules out there.
 	1. 	They are buggy. For example, circular references are not properly tracked.
 	2. 	They fail to account for `Number`, `String`, and `Boolean` objects.
 	3. 	They fail to properly validate if a value is a Node `Buffer` object. They assume, for instance, a Node environment.
@@ -250,3 +250,8 @@ Copyright &copy; 2015. Athan Reines.
 [istanbul]: https://github.com/gotwarlost/istanbul
 
 [node-buffer]: http://nodejs.org/api/buffer.html
+
+[victusfate-copyjs]: https://github.com/victusfate/copyjs/blob/master/lib/copy.js
+[sasaplus1-deepcopy]: https://github.com/sasaplus1/deepcopy.js
+[dankogai-clone]: https://github.com/dankogai/js-object-clone
+[evlun-copy]: https://github.com/evlun/copy/blob/master/copy.js
