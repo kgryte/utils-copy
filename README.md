@@ -11,7 +11,7 @@ Copy
 $ npm install utils-copy
 ```
 
-For use in the browser, use [browserify](https://github.com/substack/node-browserify).
+For use in the browser, use [browserify][browserify].
 
 
 ## Usage
@@ -94,7 +94,7 @@ console.log( value[0].c === copy[0].c );
 	-	`Uint32Array`
 	-	`Float32Array`
 	-	`Float64Array`
-	-	`Buffer` ([Node.js]((http://nodejs.org/api/buffer.html)))
+	-	`Buffer` ([Node.js][node-buffer])
 
 *	List of __unsupported__ values/types:
 	-	`DOMElement`: to copy DOM elements, use `.cloneNode()`.
@@ -191,7 +191,7 @@ $ node ./examples/index.js
 
 ### Unit
 
-Unit tests use the [Mocha](http://mochajs.org) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
+Unit tests use the [Mocha][mocha] test framework with [Chai][chai] assertions. To run the tests, execute the following command in the top-level application directory:
 
 ``` bash
 $ make test
@@ -202,7 +202,7 @@ All new feature development should have corresponding unit tests to validate cor
 
 ### Test Coverage
 
-This repository uses [Istanbul](https://github.com/gotwarlost/istanbul) as its code coverage tool. To generate a test coverage report, execute the following command in the top-level application directory:
+This repository uses [Istanbul][istanbul] as its code coverage tool. To generate a test coverage report, execute the following command in the top-level application directory:
 
 ``` bash
 $ make test-cov
@@ -244,6 +244,9 @@ Copyright &copy; 2015. Athan Reines.
 [github-issues-image]: http://img.shields.io/github/issues/kgryte/utils-copy.svg
 [github-issues-url]: https://github.com/kgryte/utils-copy/issues
 
+[browserify]: https://github.com/substack/node-browserify
 [mocha]: http://mochajs.org/
 [chai]: http://chaijs.com
 [istanbul]: https://github.com/gotwarlost/istanbul
+
+[node-buffer]: http://nodejs.org/api/buffer.html
