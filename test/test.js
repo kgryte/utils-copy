@@ -409,7 +409,7 @@ describe( 'utils-copy', function tests() {
 		assert.strictEqual( actual, expectedObj0 );
 	});
 
-	it( 'should preserve property descriptors', function test() {
+	it( 'should preserve property descriptors (shallow)', function test() {
 		var actual;
 		var desc;
 		var obj;
@@ -427,6 +427,110 @@ describe( 'utils-copy', function tests() {
 		actual = createCopy( obj );
 		assert.deepEqual( actual, obj );
 		assert.deepEqual( Object.getOwnPropertyDescriptor( actual, 'a' ), desc );
+	});
+
+	it( 'should preserve data property descriptors', function test() {
+		var actual;
+		var desc;
+		var obj;
+
+		obj = {};
+		desc = {
+			'value': 'b',
+			'writable': false,
+			'enumerable': true,
+			'configurable': false
+		};
+
+		Object.defineProperty( obj, 'a', desc );
+
+		actual = createCopy( obj );
+		assert.deepEqual( actual, obj );
+		assert.deepEqual( Object.getOwnPropertyDescriptor( actual, 'a' ), desc );
+	});
+
+	it( 'should preserve accessor property descriptors', function test() {
+		var actual;
+		var desc;
+		var obj;
+
+		obj = {};
+		desc = {
+			'enumerable': true,
+			'configurable': false,
+			'get': function get() { return 5; },
+			'set': function set() {}
+		};
+
+		Object.defineProperty( obj, 'a', desc );
+
+		actual = createCopy( obj );
+		assert.deepEqual( actual, obj );
+		assert.deepEqual( Object.getOwnPropertyDescriptor( actual, 'a' ), desc );
+	});
+
+	it( 'should preserve property descriptors (deep)', function test() {
+		var actual;
+		var desc1;
+		var desc2;
+		var obj1;
+		var obj2;
+
+		obj2 = {};
+		desc2 = {
+			'configurable': true,
+			'enumerable': true,
+			'get': function get() { return 5; },
+			'set': function set() {}
+		};
+
+		Object.defineProperty( obj2, 'b', desc2 );
+
+		obj1 = {};
+		desc1 = {
+			'value': obj2,
+			'writable': false,
+			'enumerable': true,
+			'configurable': false
+		};
+
+		Object.defineProperty( obj1, 'a', desc1 );
+
+		actual = createCopy( obj1 );
+		assert.deepEqual( actual, obj1 );
+		assert.deepEqual( Object.getOwnPropertyDescriptor( actual, 'a' ), desc1 );
+		assert.deepEqual( Object.getOwnPropertyDescriptor( actual.a, 'b' ), desc2 );
+	});
+
+	it( 'should preserve property descriptors (deep)', function test() {
+		var actual;
+		var desc1;
+		var desc2;
+		var obj1;
+		var obj2;
+
+		obj2 = {};
+		desc2 = {
+			'value': obj2,
+			'writable': false,
+			'enumerable': true,
+			'configurable': false
+		};
+		Object.defineProperty( obj2, 'b', desc2 );
+
+		obj1 = {};
+		desc1 = {
+			'configurable': true,
+			'enumerable': true,
+			'get': function get() { return obj2; },
+			'set': function set() {}
+		};
+		Object.defineProperty( obj1, 'a', desc1 );
+
+		actual = createCopy( obj1 );
+		assert.deepEqual( actual, obj1 );
+		assert.deepEqual( Object.getOwnPropertyDescriptor( actual, 'a' ), desc1 );
+		assert.deepEqual( Object.getOwnPropertyDescriptor( actual.a, 'b' ), desc2 );
 	});
 
 });
