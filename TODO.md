@@ -4,7 +4,8 @@ TODO
 1. Set support
 2. Map support
 3. Error support
-4. 
+4. consider checking for extensibility, frozen, and sealed when copying an `object`
+5. 
 
 
 ## Notes
