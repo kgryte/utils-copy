@@ -219,6 +219,12 @@ $ make view-cov
 Copyright &copy; 2015. Athan Reines.
 
 
+---
+## Browser Support
+
+[![browser support][testling-image]][testling-url]
+
+
 [npm-image]: http://img.shields.io/npm/v/utils-copy.svg
 [npm-url]: https://npmjs.org/package/utils-copy
 
@@ -236,6 +242,9 @@ Copyright &copy; 2015. Athan Reines.
 
 [github-issues-image]: http://img.shields.io/github/issues/kgryte/utils-copy.svg
 [github-issues-url]: https://github.com/kgryte/utils-copy/issues
+
+[testling-image]: https://ci.testling.com/kgryte/utils-copy.png
+[testling-url]: https://ci.testling.com/kgryte/utils-copy
 
 [browserify]: https://github.com/substack/node-browserify
 [mocha]: http://mochajs.org/
