@@ -208,6 +208,17 @@ $ make view-cov
 ```
 
 
+### Browser Support
+
+This repository uses [Testling][testling] as its browser testing tool. To run the tests in web browsers, execute the following command in the top-level application directory:
+
+``` bash
+$ make test-browsers
+```
+
+[![browser support][testling-image]][testling-url]
+
+
 ---
 ## License
 
@@ -217,12 +228,6 @@ $ make view-cov
 ## Copyright
 
 Copyright &copy; 2015. Athan Reines.
-
-
----
-## Browser Support
-
-[![browser support][testling-image]][testling-url]
 
 
 [npm-image]: http://img.shields.io/npm/v/utils-copy.svg
