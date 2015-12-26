@@ -255,6 +255,7 @@ Copyright &copy; 2015. Athan Reines.
 [mocha]: http://mochajs.org/
 [chai]: http://chaijs.com
 [istanbul]: https://github.com/gotwarlost/istanbul
+[testling]: https://ci.testling.com
 
 [node-buffer]: http://nodejs.org/api/buffer.html
 
