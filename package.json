@@ -44,7 +44,7 @@
     "url": "https://github.com/kgryte/utils-copy/issues"
   },
   "dependencies": {
-    "type-name": "^1.0.1",
+    "type-name": "^1.1.0",
     "utils-regex-from-string": "^1.0.0",
     "validate.io-array": "^1.0.3",
     "validate.io-buffer": "^1.0.0",
@@ -60,23 +60,23 @@
     "testling": "^1.7.1"
   },
   "testling": {
-  	"harness": "mocha-bdd",
-  	"files": [
-  		"test/*.js"
-  	],
-  	"browsers": [
-  		"iexplore/6.0..latest",
-			"firefox/3.0..latest",
-			"firefox/nightly",
-			"chrome/4.0..latest",
-			"chrome/canary",
-			"opera/10.0..latest",
-			"opera/next",
-			"safari/4.0..latest",
-			"ipad/6.0..latest",
-			"iphone/6.0..latest",
-			"android-browser/4.2..latest"
-  	]
+    "harness": "mocha-bdd",
+    "files": [
+      "test/*.js"
+    ],
+    "browsers": [
+      "iexplore/6.0..latest",
+      "firefox/3.0..latest",
+      "firefox/nightly",
+      "chrome/4.0..latest",
+      "chrome/canary",
+      "opera/10.0..latest",
+      "opera/next",
+      "safari/4.0..latest",
+      "ipad/6.0..latest",
+      "iphone/6.0..latest",
+      "android-browser/4.2..latest"
+    ]
   },
   "license": "MIT"
 }
