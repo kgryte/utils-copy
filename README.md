@@ -210,19 +210,13 @@ $ make view-cov
 
 ### Browser Support
 
-This repository uses [Zuul][zuul] and [Sauce Labs][saucelabs] for browser testing. To run the tests in a local web browser, execute the following command in the top-level application directory:
+This repository uses [Testling][testling] for browser testing. To run the tests in a local web browser, execute the following command in the top-level application directory:
 
 ``` bash
 $ make test-browsers
 ```
 
-and, in another terminal,
-
-``` bash
-$ make view-browser-tests
-```
-
-[![browser support][saucelabs-image]][saucelabs-url]
+[![browser support][testling-image]][testling-url]
 
 
 ---
@@ -254,15 +248,14 @@ Copyright &copy; 2015. Athan Reines.
 [github-issues-image]: http://img.shields.io/github/issues/kgryte/utils-copy.svg
 [github-issues-url]: https://github.com/kgryte/utils-copy/issues
 
-[saucelabs-image]: https://saucelabs.com
-[saucelabs-url]: https://saucelabs.com
+[testling-image]: https://ci.testling.com/kgryte/utils-copy.png
+[testling-url]: https://ci.testling.com/kgryte/utils-copy
 
 [browserify]: https://github.com/substack/node-browserify
 [mocha]: http://mochajs.org/
 [chai]: http://chaijs.com
 [istanbul]: https://github.com/gotwarlost/istanbul
-[zuul]: https://github.com/defunctzombie/zuul
-[saucelabs]: https://saucelabs.com
+[testling]: https://ci.testling.com
 
 [node-buffer]: http://nodejs.org/api/buffer.html
 
