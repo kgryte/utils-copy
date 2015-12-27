@@ -222,7 +222,7 @@ To view the tests in a local web browser,
 $ make view-browser-tests
 ```
 
-[![browser support][browsers-image]][browsers-url]
+<!-- [![browser support][browsers-image]][browsers-url] -->
 
 
 ---
