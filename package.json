@@ -57,26 +57,7 @@
     "jshint": "2.x.x",
     "jshint-stylish": "2.x.x",
     "mocha": "2.x.x",
-    "testling": "^1.7.1"
-  },
-  "testling": {
-    "harness": "mocha-bdd",
-    "files": [
-      "test/*.js"
-    ],
-    "browsers": [
-      "iexplore/6.0..latest",
-      "firefox/3.0..latest",
-      "firefox/nightly",
-      "chrome/4.0..latest",
-      "chrome/canary",
-      "opera/10.0..latest",
-      "opera/next",
-      "safari/4.0..latest",
-      "ipad/6.0..latest",
-      "iphone/6.0..latest",
-      "android-browser/4.2..latest"
-    ]
+    "zuul": "^3.8.0"
   },
   "license": "MIT"
 }

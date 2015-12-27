@@ -36,9 +36,12 @@ ISTANBUL_LCOV_INFO_PATH ?= $(ISTANBUL_OUT)/lcov.info
 ISTANBUL_HTML_REPORT_PATH ?= $(ISTANBUL_OUT)/lcov-report/index.html
 
 
-# TESTLING #
+# ZUUL #
 
-TESTLING ?= ./node_modules/.bin/testling
+ZUUL ?= ./node_modules/.bin/zuul
+ZUUL_PORT ?= 9876
+ZUUL_UI ?= mocha-bdd
+ZUUL_URI ?= http://localhost:$(ZUUL_PORT)/__zuul
 
 
 # JSHINT #
@@ -118,14 +121,22 @@ view-istanbul-report:
 
 # BROWSER TESTS #
 
-.PHONY: test-browsers test-testling
+.PHONY: test-browsers test-zuul view-browser-tests view-zuul
 
-test-browsers: test-testling
+test-browsers: test-zuul
 
-test-testling: node_modules
+test-zuul: node_modules
 	NODE_ENV=$(NODE_ENV) \
 	NODE_PATH=$(NODE_PATH_TEST) \
-	$(TESTLING)
+	$(ZUUL) \
+		--local $(ZUUL_PORT) \
+		--ui $(ZUUL_UI) \
+		-- $(TESTS)
+
+view-browser-tests: view-zuul
+
+view-zuul:
+	$(OPEN) $(ZUUL_URI)
 
 
 
