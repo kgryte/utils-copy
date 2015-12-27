@@ -13,10 +13,11 @@
     }
   ],
   "scripts": {
-    "test": "mocha && testling ./",
+    "test": "if [ \"${TRAVIS}\" ]; then npm run test-ci; else mocha; fi",
+    "test-ci": "mocha && xvfb-run testling ./",
     "test-cov": "istanbul cover ./node_modules/.bin/_mocha --dir ./reports/coverage -- -R spec",
     "test-browsers": "testling ./",
-    "codecov": "istanbul cover ./node_modules/.bin/_mocha --dir ./reports/codecov/coverage --report lcovonly -- -R spec && cat ./reports/codecov/coverage/lcov.info | codecov && rm -rf ./reports/codecov"
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha --dir ./reports/codecov/coverage --report lcovonly -- -R spec && cat ./reports/codecov/coverage/lcov.info | codecov && rm -rf ./reports/codecov"
   },
   "main": "./lib",
   "repository": {
