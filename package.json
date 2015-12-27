@@ -47,7 +47,7 @@
     "type-name": "^1.1.0",
     "utils-regex-from-string": "^1.0.0",
     "validate.io-array": "^1.0.3",
-    "validate.io-buffer": "^1.0.0",
+    "validate.io-buffer": "^1.0.1",
     "validate.io-nonnegative-integer": "^1.0.0"
   },
   "devDependencies": {
