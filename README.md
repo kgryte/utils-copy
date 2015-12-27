@@ -210,10 +210,16 @@ $ make view-cov
 
 ### Browser Support
 
-This repository uses [Testling][testling] for browser testing. To run the tests in a local web browser, execute the following command in the top-level application directory:
+This repository uses [Testling][testling] for browser testing. To run the tests in a (headless) local web browser, execute the following command in the top-level application directory:
 
 ``` bash
 $ make test-browsers
+```
+
+To view the tests in a local web browser,
+
+``` bash
+$ make view-browser-tests
 ```
 
 [![browser support][testling-image]][testling-url]

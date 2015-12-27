@@ -119,11 +119,19 @@ view-istanbul-report:
 
 # BROWSER TESTS #
 
-.PHONY: test-browsers test-testling
+.PHONY: test-browsers test-testling view-browser-tests view-testling
 
 test-browsers: test-testling
 
 test-testling: node_modules
+	NODE_ENV=$(NODE_ENV) \
+	NODE_PATH=$(NODE_PATH_TEST) \
+	$(TESTLING) \
+		$(TESTLING_DIR)
+
+view-browser-tests: view-testling
+
+view-testling: node_modules
 	NODE_ENV=$(NODE_ENV) \
 	NODE_PATH=$(NODE_PATH_TEST) \
 	$(TESTLING) \
