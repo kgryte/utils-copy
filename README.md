@@ -84,6 +84,8 @@ console.log( value[0].c === copy[0].c );
 	-	`Object`
 	-	`Date`
 	-	`RegExp`
+	- 	`Set`
+	-	`Map`
 	-	`Array`
 	-	`Int8Array`
 	-	`Uint8Array`
@@ -98,8 +100,6 @@ console.log( value[0].c === copy[0].c );
 
 *	List of __unsupported__ values/types:
 	-	`DOMElement`: to copy DOM elements, use `.cloneNode()`.
-	-	`Set`
-	-	`Map`
 	-	`Error`
 	- 	`URIError`
 	-	`ReferenceError`

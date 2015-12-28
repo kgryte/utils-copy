@@ -19,12 +19,6 @@ describe( 'utils-copy', function tests() {
 
 	// SETUP  //
 
-	function Set() {
-		return this;
-	}
-	function Map() {
-		return this;
-	}
 	function Foo() {
 		this._data = [1,2,3,4];
 		this._name = 'bar';
@@ -39,8 +33,13 @@ describe( 'utils-copy', function tests() {
 		return this;
 	}
 
-	var set = new Set();
-	var map = new Map();
+	if ( typeof Set !== void 0 ) {
+		var set = new Set( [1,2,3,4] );
+	}
+	if ( typeof Map !== void 0 ) {
+		var map = new Map();
+		map.set( 'beep', 'boop' );
+	}
 	var foo = new Foo();
 	var bar = new Bar();
 	var date = new Date();
@@ -254,22 +253,6 @@ describe( 'utils-copy', function tests() {
 		}
 	});
 
-	it( 'should return an empty object if provided Set or Map values (i.e., not supported)', function test() {
-		var actual;
-
-		actual = createCopy( set );
-		assert.deepEqual( actual, {} );
-
-		actual = createCopy( map );
-		assert.deepEqual( actual, {} );
-
-		actual = createCopy( {'set':set} );
-		assert.deepEqual( actual, {'set':{}} );
-
-		actual = createCopy( [map] );
-		assert.deepEqual( actual, [{}] );
-	});
-
 	it( 'should accept primitives', function test() {
 		var values;
 		var actual;
@@ -356,6 +339,32 @@ describe( 'utils-copy', function tests() {
 	it( 'should deep copy complex arrays', function test() {
 		var actual = createCopy( arr );
 		assert.deepEqual( actual, expectedArray );
+	});
+
+	it( 'should copy Sets', function test() {
+		var actual;
+		if ( typeof Set === void 0 ) {
+			assert.ok( true );
+			return;
+		}
+		actual = createCopy( set );
+		assert.deepEqual( actual, set );
+
+		actual = createCopy({ 'set': set });
+		assert.deepEqual( actual, { 'set': set });
+	});
+
+	it( 'should copy Maps', function test() {
+		var actual;
+		if ( typeof Map === void 0 ) {
+			assert.ok( true );
+			return;
+		}
+		actual = createCopy( map );
+		assert.deepEqual( actual, map );
+
+		actual = createCopy( [ map ] );
+		assert.deepEqual( actual, [ map ] );
 	});
 
 	it( 'should handle circular references', function test() {
