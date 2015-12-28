@@ -100,6 +100,9 @@ console.log( value[0].c === copy[0].c );
 
 *	List of __unsupported__ values/types:
 	-	`DOMElement`: to copy DOM elements, use `.cloneNode()`.
+	-	`Symbol`
+	-	`WeakMap`
+	-	`WeakSet`
 	-	`Error`
 	- 	`URIError`
 	-	`ReferenceError`
