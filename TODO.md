@@ -3,7 +3,9 @@ TODO
 
 1. Error support
 2. consider checking for extensibility, frozen, and sealed when copying an `object`
-3. 
+3. WeakMap support (?)
+4. WeakSet support (?)
+5. 
 
 
 ## Notes

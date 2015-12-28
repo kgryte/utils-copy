@@ -33,10 +33,10 @@ describe( 'utils-copy', function tests() {
 		return this;
 	}
 
-	if ( typeof Set !== void 0 ) {
+	if ( typeof Set !== 'undefined' ) {
 		var set = new Set( [1,2,3,4] );
 	}
-	if ( typeof Map !== void 0 ) {
+	if ( typeof Map !== 'undefined' ) {
 		var map = new Map();
 		map.set( 'beep', 'boop' );
 	}
@@ -343,7 +343,7 @@ describe( 'utils-copy', function tests() {
 
 	it( 'should copy Sets', function test() {
 		var actual;
-		if ( typeof Set === void 0 ) {
+		if ( typeof Set === 'undefined' ) {
 			assert.ok( true );
 			return;
 		}
@@ -356,7 +356,7 @@ describe( 'utils-copy', function tests() {
 
 	it( 'should copy Maps', function test() {
 		var actual;
-		if ( typeof Map === void 0 ) {
+		if ( typeof Map === 'undefined' ) {
 			assert.ok( true );
 			return;
 		}
