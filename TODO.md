@@ -1,11 +1,9 @@
 TODO
 ====
 
-1. Set support
-2. Map support
-3. Error support
-4. consider checking for extensibility, frozen, and sealed when copying an `object`
-5. 
+1. Error support
+2. consider checking for extensibility, frozen, and sealed when copying an `object`
+3. 
 
 
 ## Notes
