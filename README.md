@@ -108,6 +108,12 @@ console.log( value[0].c === copy[0].c );
 	-	`ReferenceError`
 	-	`SyntaxError`
 	-	`RangeError`
+	-	`Blob`
+	- 	`File`
+	-	`FileList`
+	-	`ImageData`
+	-	`ImageBitmap`
+	-	`ArrayBuffer`
 
 *	If you need support for any of the above types, feel free to file an issue or submit a pull request.
 *	The implementation can handle circular references.
