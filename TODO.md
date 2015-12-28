@@ -4,8 +4,11 @@ TODO
 1. Error support
 2. consider checking for extensibility, frozen, and sealed when copying an `object`
 3. WeakMap support (?)
+	-	not convinced this is viable due to weakly held references; i.e., getting a list of `keys` requires maintaining a separate list.
 4. WeakSet support (?)
+	-	see WeakMap above
 5. Symbol support
+	-	requires the ability to get [primitive value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
 6. 
 
 
