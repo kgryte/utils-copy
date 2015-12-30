@@ -130,7 +130,7 @@ console.log( value[0].c === copy[0].c );
 	}
 
 	var foo = new Foo();
-	var fooey = createCopy( foo );
+	var fooey = cp( foo );
 
 	console.log( foo._name === fooey._name );
 	// returns true
