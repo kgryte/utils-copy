@@ -230,6 +230,48 @@ test( 'copy Maps', function test( t ) {
 	t.end();
 });
 
+test( 'object which cannot be extended', function test( t ) {
+	var val = fixtures.cantExtend;
+	var cp = {};
+	var actual = copy( val, cp, [val], [cp], LEVEL );
+
+	t.notEqual( actual, val, 'distinct references' );
+	assert.deepEqual( actual, val );
+	t.ok( true, 'deep equal' );
+
+	t.ok( !Object.isExtensible( actual ), 'cannot be extended' );
+
+	t.end();
+});
+
+test( 'object which is sealed', function test( t ) {
+	var val = fixtures.sealed;
+	var cp = [];
+	var actual = copy( val, cp, [val], [cp], LEVEL );
+
+	t.notEqual( actual, val, 'distinct references' );
+	assert.deepEqual( actual, val );
+	t.ok( true, 'deep equal' );
+
+	t.ok( Object.isSealed( actual ), 'is sealed' );
+
+	t.end();
+});
+
+test( 'object which is frozen', function test( t ) {
+	var val = fixtures.frozen;
+	var cp = {};
+	var actual = copy( val, cp, [val], [cp], LEVEL );
+
+	t.notEqual( actual, val, 'distinct references' );
+	assert.deepEqual( actual, val );
+	t.ok( true, 'deep equal' );
+
+	t.ok( Object.isFrozen( actual ), 'is frozen' );
+
+	t.end();
+});
+
 test( 'circular references', function test( t ) {
 	var val = {};
 	var cp = {};

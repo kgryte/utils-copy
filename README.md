@@ -118,7 +118,8 @@ console.log( value[0].c === copy[0].c );
 	If you need support for any of the above types, feel free to file an issue or submit a pull request.
 *	The implementation __can__ handle circular references.
 *	If a `Number`, `String`, or `Boolean` object is encountered, the value is cloned as a __primitive__. This behavior is intentional. The implementation is opinionated in wanting to __avoid__ creating `numbers`, `strings`, and `booleans` via the `new` operator and a constructor.
-* 	For `objects`, the implementation __only__ copies `enumerable` keys.
+* 	For `objects`, the implementation __only__ copies `enumerable` keys and their associated property descriptors.
+*	The implementation __only__ checks whether basic `Objects`, `Arrays`, and class instances are `extensible`, `sealed`, and/or `frozen`. If you need this extended to other `object` types, file an issue or submit a pull request.
 *	`functions` are __not__ cloned; their reference is copied.
 *	Support for copying class instances is inherently __fragile__. Any instances with privileged access to variables (e.g., within closures) cannot be cloned. This stated, basic copying of class instances is supported. Provided an environment which supports ES5, the implementation is greedy and performs a deep clone of any arbitrary class instance and its properties. The implementation assumes that the concept of `level` applies only to the class instance reference, but not to its internal state.
 

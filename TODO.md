@@ -1,8 +1,8 @@
 TODO
 ====
 
-1. 
-2. consider checking for extensibility, frozen, and sealed when copying an `object`
+1. should `preventExtensions`, `seal`, and `freeze` be extended to `objects` beyond `Object`, `Array`, and class instances?
+2. 
 3. `WeakMap` support (?)
 	-	not convinced this is viable due to weakly held references; i.e., getting a list of `keys` requires maintaining a separate list.
 4. `WeakSet` support (?)

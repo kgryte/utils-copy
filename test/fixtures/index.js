@@ -29,6 +29,9 @@ var foo = new Foo();
 module.exports.foo = foo;
 
 var bar = new Bar();
+Object.preventExtensions( bar );
+Object.seal( bar );
+Object.freeze( bar );
 module.exports.bar = bar;
 
 var date = new Date();
@@ -88,9 +91,17 @@ module.exports.err = err;
 var terr = new TypeError( 'boop' );
 module.exports.terr = terr;
 
-Object.preventExtensions( bar );
-Object.seal( bar );
-Object.freeze( bar );
+var cantExtend = { 'beep': 'boop' };
+Object.preventExtensions( cantExtend );
+module.exports.cantExtend = cantExtend;
+
+var sealed = [ 1, 2, 3 ];
+Object.seal( sealed );
+module.exports.sealed = sealed;
+
+var frozen = { 'a': { 'b': 'c' } };
+Object.freeze( frozen );
+module.exports.frozen = frozen;
 
 module.exports.arr = [
 	[
