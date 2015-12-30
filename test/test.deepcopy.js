@@ -15,6 +15,11 @@ var LEVEL = Number.POSITIVE_INFINITY;
 
 // TESTS //
 
+test( 'file exports a function', function test( t ) {
+	t.equal( typeof copy, 'function', 'export is a function' );
+	t.end();
+});
+
 test( 'copy primitives', function test( t ) {
 	var values;
 	var actual;
@@ -99,6 +104,26 @@ test( 'copy RegExp objects', function test( t ) {
 	var actual = copy( val, cp, [val], [cp], LEVEL );
 	t.notEqual( actual, val, 'distinct references' );
 	t.equal( actual.toString(), val.toString(), 'equal values' );
+	t.end();
+});
+
+test( 'copy Error objects', function test( t ) {
+	var val = fixtures.err;
+	var cp = {};
+	var actual = copy( val, cp, [val], [cp], LEVEL );
+	t.notEqual( actual, val, 'distinct references' );
+	assert.deepEqual( actual, val );
+	t.ok( true, 'deep equal' );
+	t.end();
+});
+
+test( 'copy special Error objects (e.g., TypeError, etc)', function test( t ) {
+	var val = fixtures.terr;
+	var cp = {};
+	var actual = copy( val, cp, [val], [cp], LEVEL );
+	t.notEqual( actual, val, 'distinct references' );
+	assert.deepEqual( actual, val );
+	t.ok( true, 'deep equal' );
 	t.end();
 });
 

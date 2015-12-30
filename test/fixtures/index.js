@@ -82,6 +82,12 @@ module.exports.float32arr = float32arr;
 var float64arr = new Float64Array([Number.MAX_VALUE]);
 module.exports.float64arr = float64arr;
 
+var err = new Error( 'beep' );
+module.exports.err = err;
+
+var terr = new TypeError( 'boop' );
+module.exports.terr = terr;
+
 Object.preventExtensions( bar );
 Object.seal( bar );
 Object.freeze( bar );
@@ -100,7 +106,9 @@ module.exports.arr = [
 			'obj': {
 				'uint16arr': uint16arr
 			},
-			'fcn': fcn
+			'fcn': fcn,
+			'err': err,
+			'terr': terr
 		},
 		bool,
 		str,
@@ -110,6 +118,8 @@ module.exports.arr = [
 		Math.PI,
 		null,
 		float64arr,
+		err,
+		terr,
 		fcn,
 		buffer,
 		foo,
@@ -143,7 +153,9 @@ module.exports.arr = [
 	int32arr,
 	uint32arr,
 	float32arr,
-	float64arr
+	float64arr,
+	err,
+	terr
 ];
 
 module.exports.expectedArray = [
@@ -160,7 +172,9 @@ module.exports.expectedArray = [
 			'obj': {
 				'uint16arr': new Uint16Array( uint16arr )
 			},
-			'fcn': fcn
+			'fcn': fcn,
+			'err': new Error( 'beep' ),
+			'terr': new TypeError( 'boop' )
 		},
 		true,
 		'beep',
@@ -170,6 +184,8 @@ module.exports.expectedArray = [
 		Math.PI,
 		null,
 		new Float64Array( float64arr ),
+		new Error( 'beep' ),
+		new TypeError( 'boop' ),
 		fcn,
 		cbuffer,
 		new Foo(),
@@ -203,7 +219,9 @@ module.exports.expectedArray = [
 	new Int32Array( int32arr ),
 	new Uint32Array( uint32arr ),
 	new Float32Array( float32arr ),
-	new Float64Array( float64arr )
+	new Float64Array( float64arr ),
+	new Error( 'beep' ),
+	new TypeError( 'boop' )
 ];
 
 var obj = {
