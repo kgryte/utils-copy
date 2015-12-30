@@ -11,16 +11,14 @@ Copy
 $ npm install utils-copy
 ```
 
-For use in the browser, use [browserify][browserify].
-
 
 ## Usage
 
 ``` javascript
-var createCopy = require( 'utils-copy' );
+var cp = require( 'utils-copy' );
 ```
 
-#### createCopy( value[, level] )
+#### cp( value[, level] )
 
 Copy or deep clone a `value` to an arbitrary depth. The `function` accepts both `objects` and `primitives`.
 
@@ -29,19 +27,19 @@ var value, copy;
 
 // Primitives...
 value = 'beep';
-copy = createCopy( value );
+copy = cp( value );
 // returns 'beep'
 
 // Objects...
 value = [{'a':1,'b':true,'c':[1,2,3]}];
-copy = createCopy( value );
+copy = cp( value );
 // returns [{'a':1,'b':true,'c':[1,2,3]}]
 
 console.log( value[0].c === copy[0].c );
 // returns false
 ```
 
-The default behavior returns a __full__ deep copy of any `objects`. To limit the copy depth, set the `level` option.
+The default behavior returns a __full__ deep copy of any `object`. To limit the copy depth, set the `level` option.
 
 ``` javascript
 var value, copy;
@@ -49,14 +47,14 @@ var value, copy;
 value = [{'a':1,'b':true,'c':[1,2,3]}];
 
 // Trivial case => return the same reference
-copy = createCopy( value, 0 );
+copy = cp( value, 0 );
 // returns [{'a':1,'b':true,'c':[1,2,3]}]
 
 console.log( value[0] === copy[0] );
 // returns true
 
 // Shallow copy:
-copy = createCopy( value, 1 );
+copy = cp( value, 1 );
 
 console.log( value[0] === copy[0] );
 // returns false
@@ -65,7 +63,7 @@ console.log( value[0].c === copy[0].c );
 // returns true
 
 // Deep copy:
-copy = createCopy( value, 2 );
+copy = cp( value, 2 );
 
 console.log( value[0].c === copy[0].c );
 // returns false
@@ -86,6 +84,13 @@ console.log( value[0].c === copy[0].c );
 	-	`RegExp`
 	- 	`Set`
 	-	`Map`
+	-	`Error`
+	- 	`URIError`
+	-	`ReferenceError`
+	-	`SyntaxError`
+	-	`RangeError`
+	-	`EvalError`
+	-	`TypeError`
 	-	`Array`
 	-	`Int8Array`
 	-	`Uint8Array`
@@ -99,15 +104,10 @@ console.log( value[0].c === copy[0].c );
 	-	`Buffer` ([Node.js][node-buffer])
 
 *	List of __unsupported__ values/types:
-	-	`DOMElement`: to copy DOM elements, use `.cloneNode()`.
+	-	`DOMElement`: to copy DOM elements, use `element.cloneNode()`.
 	-	`Symbol`
 	-	`WeakMap`
 	-	`WeakSet`
-	-	`Error`
-	- 	`URIError`
-	-	`ReferenceError`
-	-	`SyntaxError`
-	-	`RangeError`
 	-	`Blob`
 	- 	`File`
 	-	`FileList`
@@ -115,10 +115,10 @@ console.log( value[0].c === copy[0].c );
 	-	`ImageBitmap`
 	-	`ArrayBuffer`
 
-*	If you need support for any of the above types, feel free to file an issue or submit a pull request.
-*	The implementation can handle circular references.
-*	If a `Number`, `String`, or `Boolean` object is encountered, the value is cloned as a primitive. This behavior is intentional. The implementation is opinionated in wanting to __avoid__ creating `numbers`, `strings`, and `booleans` via the `new` operator and a constructor.
-* 	For `objects`, the implementation __only__ copies the `enumerable` keys.
+	If you need support for any of the above types, feel free to file an issue or submit a pull request.
+*	The implementation __can__ handle circular references.
+*	If a `Number`, `String`, or `Boolean` object is encountered, the value is cloned as a __primitive__. This behavior is intentional. The implementation is opinionated in wanting to __avoid__ creating `numbers`, `strings`, and `booleans` via the `new` operator and a constructor.
+* 	For `objects`, the implementation __only__ copies `enumerable` keys.
 *	`functions` are __not__ cloned; their reference is copied.
 *	Support for copying class instances is inherently __fragile__. Any instances with privileged access to variables (e.g., within closures) cannot be cloned. This stated, basic copying of class instances is supported. Provided an environment which supports ES5, the implementation is greedy and performs a deep clone of any arbitrary class instance and its properties. The implementation assumes that the concept of `level` applies only to the class instance reference, but not to its internal state.
 
@@ -143,11 +143,10 @@ console.log( value[0].c === copy[0].c );
 	```
 
 
-
 ## Examples
 
 ``` javascript
-var createCopy = require( 'utils-copy' );
+var cp = require( 'utils-copy' );
 
 var arr = [
 	{
@@ -164,7 +163,7 @@ var arr = [
 	}
 ];
 
-var copy = createCopy( arr );
+var copy = cp( arr );
 
 console.log( arr[ 0 ] === copy[ 0 ] );
 // returns false
@@ -173,7 +172,7 @@ console.log( arr[ 1 ].y === copy[ 1 ].y );
 // returns false
 
 
-copy = createCopy( arr, 1 );
+copy = cp( arr, 1 );
 
 console.log( arr[ 0 ] === copy[ 0 ] );
 // returns true
@@ -189,11 +188,12 @@ $ node ./examples/index.js
 ```
 
 
+---
 ## Tests
 
 ### Unit
 
-Unit tests use the [Mocha][mocha] test framework with [Chai][chai] assertions. To run the tests, execute the following command in the top-level application directory:
+This repository uses [tape][tape] for unit tests. To run the tests, execute the following command in the top-level application directory:
 
 ``` bash
 $ make test
@@ -266,9 +266,7 @@ Copyright &copy; 2015. Athan Reines.
 [browsers-image]: https://ci.testling.com/kgryte/utils-copy.png
 [browsers-url]: https://ci.testling.com/kgryte/utils-copy
 
-[browserify]: https://github.com/substack/node-browserify
-[mocha]: http://mochajs.org/
-[chai]: http://chaijs.com
+[tape]: https://github.com/substack/tape
 [istanbul]: https://github.com/gotwarlost/istanbul
 [testling]: https://ci.testling.com
 

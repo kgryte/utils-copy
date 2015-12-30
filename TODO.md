@@ -1,7 +1,7 @@
 TODO
 ====
 
-1. `Error` support
+1. 
 2. consider checking for extensibility, frozen, and sealed when copying an `object`
 3. `WeakMap` support (?)
 	-	not convinced this is viable due to weakly held references; i.e., getting a list of `keys` requires maintaining a separate list.

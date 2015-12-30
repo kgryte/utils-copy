@@ -1,6 +1,6 @@
 'use strict';
 
-var createCopy = require( './../lib' );
+var cp = require( './../lib' );
 
 var arr = [
 	{
@@ -17,7 +17,7 @@ var arr = [
 	}
 ];
 
-var copy = createCopy( arr );
+var copy = cp( arr );
 
 console.log( arr[ 0 ] === copy[ 0 ] );
 // returns false
@@ -26,7 +26,7 @@ console.log( arr[ 1 ].y === copy[ 1 ].y );
 // returns false
 
 
-copy = createCopy( arr, 1 );
+copy = cp( arr, 1 );
 
 console.log( arr[ 0 ] === copy[ 0 ] );
 // returns true
