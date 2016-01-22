@@ -30,3 +30,10 @@ TODO
 	6. 	They do not allow limiting the copy depth.
 	7. 	They assume an `array` or `object` input value.
 	8. 	They are not sufficiently tested.
+
+
+
+[victusfate-copyjs]: https://github.com/victusfate/copyjs/blob/master/lib/copy.js
+[sasaplus1-deepcopy]: https://github.com/sasaplus1/deepcopy.js
+[dankogai-clone]: https://github.com/dankogai/js-object-clone
+[evlun-copy]: https://github.com/evlun/copy/blob/master/copy.js
