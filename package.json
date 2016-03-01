@@ -52,7 +52,7 @@
   "dependencies": {
     "const-pinf-float64": "^1.0.0",
     "object-keys": "^1.0.9",
-    "type-name": "^1.1.0",
+    "type-name": "^2.0.0",
     "utils-copy-error": "^1.0.0",
     "utils-indexof": "^1.0.0",
     "utils-regex-from-string": "^1.0.0",
