@@ -2,7 +2,7 @@
 
 // MODULES //
 
-var test = require( 'tape' );
+var tape = require( 'tape' );
 var assert = require( 'chai' ).assert;
 var copy = require( './../lib' );
 var fixtures = require( './fixtures' );
@@ -10,12 +10,12 @@ var fixtures = require( './fixtures' );
 
 // TESTS //
 
-test( 'main export is a function', function test( t ) {
-	t.ok( typeof copy === 'function', 'export is a function' );
+tape( 'main export is a function', function test( t ) {
+	t.equal( typeof copy, 'function', 'export is a function' );
 	t.end();
 });
 
-test( 'if provided a nonnegative integer level, the function will throw an error', function test( t ) {
+tape( 'if provided a nonnegative integer level, the function will throw an error', function test( t ) {
 	var values;
 	var i;
 
@@ -44,7 +44,7 @@ test( 'if provided a nonnegative integer level, the function will throw an error
 	}
 });
 
-test( 'deep copy', function test( t ) {
+tape( 'deep copy', function test( t ) {
 	var actual;
 
 	// Primitives...
@@ -67,7 +67,7 @@ test( 'deep copy', function test( t ) {
 	t.end();
 });
 
-test( 'deep copy (specified level)', function test( t ) {
+tape( 'deep copy (specified level)', function test( t ) {
 	var actual;
 
 	actual = copy( fixtures.obj, 1 );
@@ -81,7 +81,7 @@ test( 'deep copy (specified level)', function test( t ) {
 	t.end();
 });
 
-test( 'when provided a level equal to 0, the function returns the input reference', function test( t ) {
+tape( 'when provided a level equal to 0, the function returns the input reference', function test( t ) {
 	var actual = copy( fixtures.obj, 0 );
 	t.equal( actual, fixtures.obj, 'copy to depth 0' );
 	t.end();

@@ -2,25 +2,26 @@
 
 // MODULES //
 
-var test = require( 'tape' );
+var tape = require( 'tape' );
 var assert = require( 'chai' ).assert;
+var PINF = require( 'const-pinf-float64' );
 var copy = require( './../lib/deepcopy.js' );
 var fixtures = require( './fixtures' );
 
 
 // VARIABLES //
 
-var LEVEL = Number.POSITIVE_INFINITY;
+var LEVEL = PINF;
 
 
 // TESTS //
 
-test( 'file exports a function', function test( t ) {
+tape( 'file exports a function', function test( t ) {
 	t.equal( typeof copy, 'function', 'export is a function' );
 	t.end();
 });
 
-test( 'copy primitives', function test( t ) {
+tape( 'copy primitives', function test( t ) {
 	var values;
 	var actual;
 	var val;
@@ -44,114 +45,182 @@ test( 'copy primitives', function test( t ) {
 	t.end();
 });
 
-test( 'copy NaN', function test( t ) {
-	var val = NaN;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
+tape( 'copy NaN', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = NaN;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
+
 	t.notEqual( actual, actual, 'copies a NaN primitive' );
 	t.end();
 });
 
-test( 'copy typed arrays', function test( t ) {
-	var val = fixtures.int16arr;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
+tape( 'copy typed arrays', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.int16arr;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
+
 	t.notEqual( actual, val, 'distinct references' );
 	assert.deepEqual( actual, val );
 	t.ok( true, 'deep equal' );
+
 	t.end();
 });
 
-test( 'copy Boolean objects to boolean primitives', function test( t ) {
-	var val = fixtures.bool;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
+tape( 'copy Boolean objects to boolean primitives', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.bool;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
+
 	t.notEqual( typeof actual, 'object', 'not an object' );
 	t.equal( actual, true, 'equal values' );
+
 	t.end();
 });
 
-test( 'copy String objects to string primitives', function test( t ) {
-	var val = fixtures.str;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
+tape( 'copy String objects to string primitives', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.str;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
+
 	t.notEqual( typeof actual, 'object', 'not an object' );
 	t.equal( actual, 'beep', 'equal values' );
+
 	t.end();
 });
 
-test( 'copy Number objects to number primitives', function test( t ) {
-	var val = fixtures.num;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
+tape( 'copy Number objects to number primitives', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.num;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
+
 	t.notEqual( typeof actual, 'object', 'not an object' );
 	t.equal( actual, Math.PI, 'equal values' );
+
 	t.end();
 });
 
-test( 'copy Date objects', function test( t ) {
-	var val = fixtures.date;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
+tape( 'copy Date objects', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.date;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
+
 	t.notEqual( actual, val, 'distinct references' );
 	t.equal( +actual, +val, 'equal values' );
+
 	t.end();
 });
 
-test( 'copy RegExp objects', function test( t ) {
-	var val = fixtures.re;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
+tape( 'copy RegExp objects', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.re;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
+
 	t.notEqual( actual, val, 'distinct references' );
 	t.equal( actual.toString(), val.toString(), 'equal values' );
+
 	t.end();
 });
 
-test( 'copy Error objects', function test( t ) {
-	var val = fixtures.err;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
-	t.notEqual( actual, val, 'distinct references' );
-	assert.deepEqual( actual, val );
-	t.ok( true, 'deep equal' );
-	t.end();
-});
-
-test( 'copy special Error objects (e.g., TypeError, etc)', function test( t ) {
-	var val = fixtures.terr;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
-	t.notEqual( actual, val, 'distinct references' );
-	assert.deepEqual( actual, val );
-	t.ok( true, 'deep equal' );
-	t.end();
-});
-
-test( 'copy Node buffers', function test( t ) {
-	var val = fixtures.buffer;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
-	t.notEqual( actual, val, 'distinct references' );
-	assert.deepEqual( actual, val );
-	t.ok( true, 'deep equal' );
-	t.end();
-});
-
-test( 'clone (simple) class instances', function test( t ) {
-	var val = fixtures.foo;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
-	t.notEqual( actual, val, 'distinct references' );
-	assert.deepEqual( actual, val );
-	t.ok( true, 'deep equal' );
-	t.end();
-});
-
-test( 'if an environment does not support at least ES5, the function will return an empty object for class instances', function test( t ) {
-	var val = fixtures.bar;
-	var cp = {};
-	var freeze;
+tape( 'copy Error objects', function test( t ) {
 	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.err;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
+
+	t.notEqual( actual, val, 'distinct references' );
+	assert.deepEqual( actual, val );
+	t.ok( true, 'deep equal' );
+
+	t.end();
+});
+
+tape( 'copy special Error objects (e.g., TypeError, etc)', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.terr;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
+
+	t.notEqual( actual, val, 'distinct references' );
+	assert.deepEqual( actual, val );
+	t.ok( true, 'deep equal' );
+
+	t.end();
+});
+
+tape( 'copy Node buffers', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.buffer;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
+
+	t.notEqual( actual, val, 'distinct references' );
+	assert.deepEqual( actual, val );
+	t.ok( true, 'deep equal' );
+
+	t.end();
+});
+
+tape( 'clone (simple) class instances', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.foo;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
+
+	t.notEqual( actual, val, 'distinct references' );
+	assert.deepEqual( actual, val );
+	t.ok( true, 'deep equal' );
+
+	t.end();
+});
+
+tape( 'if an environment does not support at least ES5, the function will return an empty object for class instances', function test( t ) {
+	var actual;
+	var freeze;
+	var val;
+	var cp;
+
+	val = fixtures.bar;
+	cp = {};
 
 	freeze = Object.freeze;
 	Object.freeze = undefined;
@@ -164,17 +233,23 @@ test( 'if an environment does not support at least ES5, the function will return
 	t.end();
 });
 
-test( 'copy complex arrays', function test( t ) {
-	var val = fixtures.arr;
-	var cp = [];
-	var actual = copy( val, cp, [val], [cp], LEVEL );
+tape( 'copy complex arrays', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.arr;
+	cp = [];
+	actual = copy( val, cp, [val], [cp], LEVEL );
+
 	t.notEqual( actual, val, 'distinct references' );
 	assert.deepEqual( actual, fixtures.expectedArray );
 	t.ok( true, 'deep equal' );
+
 	t.end();
 });
 
-test( 'copy Sets', function test( t ) {
+tape( 'copy Sets', function test( t ) {
 	var actual;
 	var val;
 	var cp;
@@ -202,7 +277,7 @@ test( 'copy Sets', function test( t ) {
 	t.end();
 });
 
-test( 'copy Maps', function test( t ) {
+tape( 'copy Maps', function test( t ) {
 	var actual;
 	var val;
 	var cp;
@@ -230,10 +305,14 @@ test( 'copy Maps', function test( t ) {
 	t.end();
 });
 
-test( 'object which cannot be extended', function test( t ) {
-	var val = fixtures.cantExtend;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
+tape( 'object which cannot be extended', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.cantExtend;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
 
 	t.notEqual( actual, val, 'distinct references' );
 	assert.deepEqual( actual, val );
@@ -244,10 +323,14 @@ test( 'object which cannot be extended', function test( t ) {
 	t.end();
 });
 
-test( 'object which is sealed', function test( t ) {
-	var val = fixtures.sealed;
-	var cp = [];
-	var actual = copy( val, cp, [val], [cp], LEVEL );
+tape( 'object which is sealed', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.sealed;
+	cp = [];
+	actual = copy( val, cp, [val], [cp], LEVEL );
 
 	t.notEqual( actual, val, 'distinct references' );
 	assert.deepEqual( actual, val );
@@ -258,10 +341,14 @@ test( 'object which is sealed', function test( t ) {
 	t.end();
 });
 
-test( 'object which is frozen', function test( t ) {
-	var val = fixtures.frozen;
-	var cp = {};
-	var actual = copy( val, cp, [val], [cp], LEVEL );
+tape( 'object which is frozen', function test( t ) {
+	var actual;
+	var val;
+	var cp;
+
+	val = fixtures.frozen;
+	cp = {};
+	actual = copy( val, cp, [val], [cp], LEVEL );
 
 	t.notEqual( actual, val, 'distinct references' );
 	assert.deepEqual( actual, val );
@@ -272,10 +359,13 @@ test( 'object which is frozen', function test( t ) {
 	t.end();
 });
 
-test( 'circular references', function test( t ) {
-	var val = {};
-	var cp = {};
+tape( 'circular references', function test( t ) {
 	var actual;
+	var val;
+	var cp;
+
+	val = {};
+	cp = {};
 
 	val.to = val;
 	actual = copy( val, cp, [val], [cp], LEVEL );
@@ -287,7 +377,7 @@ test( 'circular references', function test( t ) {
 	t.end();
 });
 
-test( 'arbitrary depth', function test( t ) {
+tape( 'arbitrary depth', function test( t ) {
 	var actual;
 	var val;
 	var cp;
@@ -310,7 +400,7 @@ test( 'arbitrary depth', function test( t ) {
 	t.end();
 });
 
-test( 'arbitrary depth', function test( t ) {
+tape( 'arbitrary depth', function test( t ) {
 	var actual;
 	var val;
 	var cp;
@@ -336,7 +426,7 @@ test( 'arbitrary depth', function test( t ) {
 	t.end();
 });
 
-test( 'property descriptors (primitives)', function test( t ) {
+tape( 'property descriptors (primitives)', function test( t ) {
 	var actual;
 	var desc;
 	var obj;
@@ -364,7 +454,7 @@ test( 'property descriptors (primitives)', function test( t ) {
 	t.end();
 });
 
-test( 'data property descriptors', function test( t ) {
+tape( 'data property descriptors', function test( t ) {
 	var actual;
 	var desc;
 	var obj;
@@ -392,7 +482,7 @@ test( 'data property descriptors', function test( t ) {
 	t.end();
 });
 
-test( 'accessor property descriptors', function test( t ) {
+tape( 'accessor property descriptors', function test( t ) {
 	var actual;
 	var desc;
 	var obj;
@@ -420,7 +510,7 @@ test( 'accessor property descriptors', function test( t ) {
 	t.end();
 });
 
-test( 'data property descriptors (nested)', function test( t ) {
+tape( 'data property descriptors (nested)', function test( t ) {
 	var actual;
 	var desc1;
 	var desc2;
@@ -463,7 +553,7 @@ test( 'data property descriptors (nested)', function test( t ) {
 	t.end();
 });
 
-test( 'accessor property descriptors (deep)', function test( t ) {
+tape( 'accessor property descriptors (deep)', function test( t ) {
 	var actual;
 	var desc1;
 	var desc2;

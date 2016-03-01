@@ -242,7 +242,7 @@ $ make view-browser-tests
 
 ## Copyright
 
-Copyright &copy; 2015. Athan Reines.
+Copyright &copy; 2015-2016. Athan Reines.
 
 
 [npm-image]: http://img.shields.io/npm/v/utils-copy.svg
@@ -271,8 +271,3 @@ Copyright &copy; 2015. Athan Reines.
 [testling]: https://ci.testling.com
 
 [node-buffer]: http://nodejs.org/api/buffer.html
-
-[victusfate-copyjs]: https://github.com/victusfate/copyjs/blob/master/lib/copy.js
-[sasaplus1-deepcopy]: https://github.com/sasaplus1/deepcopy.js
-[dankogai-clone]: https://github.com/dankogai/js-object-clone
-[evlun-copy]: https://github.com/evlun/copy/blob/master/copy.js
